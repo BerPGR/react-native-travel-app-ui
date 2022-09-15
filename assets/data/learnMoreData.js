@@ -15,3 +15,5 @@ const learnMoreData = [
         image: require('../images/australia.png')
     },
 ]
+
+export default learnMoreData;
