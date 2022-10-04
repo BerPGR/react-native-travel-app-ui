@@ -1,15 +1,37 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
 import colors from '../assets/colors/colors';
 import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
 import activitiesData from '../assets/data/activitiesData'
+import discoverData from'../assets/data/discoverData'
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import profile from '../assets/images/person.png'
 
 Feather.loadFont();
+Entypo.loadFont();
 
 const Home = ({navigation}) => {
+
+    const renderDiscoveryItem = ({item}) => {
+        return (
+            <TouchableOpacity>
+                <ImageBackground
+                    source={item.image}
+                    style={[styles.discoverItem, {marginLeft: item.id === 'discover-1' ? 20 : 0}]}
+                    imageStyle={styles.discoverItemImage}
+                >
+                    <Text style={styles.discoverItemTitle}>{item.title}</Text>
+                    <View style={styles.discoverItemLocationWrapper}>
+                        <Entypo name="location-pin" size={10} color={colors.white}/>
+                        <Text style={styles.discoverItemLocationText}>{item.location}</Text>
+                    </View>
+                </ImageBackground>
+            </TouchableOpacity>       
+        )
+    }
+
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -21,6 +43,28 @@ const Home = ({navigation}) => {
                         <Image source={profile} style={styles.profileImage}/>
                     </View>
                 </SafeAreaView>
+
+                {/* Discover */}
+                <View style={styles.discoverWrapper}>
+                    <Text style={styles.discoverTitle}>Discover</Text>
+                    <View style={styles.discoverCategoriesWrapper}>
+                        <Text style={[styles.discoverCategoryText, {
+                            color: colors.orange
+                        }]}>All</Text>
+                        <Text style={styles.discoverCategoryText}>Destinations</Text>
+                        <Text style={styles.discoverCategoryText}>Cities</Text>
+                        <Text style={styles.discoverCategoryText}>Experiences</Text>
+                    </View>
+                    <View style={styles.discoverItemsWrapper}>
+                        <FlatList 
+                            data={discoverData}
+                            renderItem={renderDiscoveryItem}
+                            keyExtractor={(item) => item.id}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                        />
+                    </View>
+                </View>
             </ScrollView>
         </View>
     )
@@ -40,7 +84,58 @@ const styles = StyleSheet.create({
     },
     profileImage: {
         width: 52,
-        height: 52
+        height: 52,
+        borderRadius: 10
+    },
+    discoverWrapper: {
+       // marginHorizontal: 20,
+        marginTop: 20
+    },
+    discoverTitle: {
+        marginHorizontal: 20,
+        fontFamily: 'Lato-Bold',
+        fontSize: 32
+    },
+    discoverCategoriesWrapper: {
+        marginHorizontal: 20,
+        flexDirection: 'row',
+        marginTop: 20
+    },
+    discoverCategoryText: {
+        marginRight: 30,
+        fontFamily: 'Lato-Regular',
+        fontSize: 16,
+        color: colors.grey 
+    },
+    discoverItem: {
+        width: 170,
+        height: 250,
+        justifyContent: 'flex-end',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        marginRight: 20
+    },
+    discoverItemImage: {
+        borderRadius: 20
+    },
+    discoverItemTitle: {
+        fontFamily: 'Lato-Bold',
+        fontSize: 18,
+        color: colors.white
+    },
+    discoverItemLocationWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5
+    },
+    discoverItemLocationText: {
+        marginLeft: 5,
+        fontFamily: 'Lato-Bold',
+        fontSize: 14,
+        color: colors.white
+    },
+    discoverItemsWrapper: {
+        paddingVertical: 20
     },
 })
 
