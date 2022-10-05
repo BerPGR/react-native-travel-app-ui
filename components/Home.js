@@ -16,7 +16,11 @@ const Home = ({navigation}) => {
 
     const renderDiscoveryItem = ({item}) => {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Details', {
+                    item: item,
+                })}
+            >
                 <ImageBackground
                     source={item.image}
                     style={[styles.discoverItem, {marginLeft: item.id === 'discover-1' ? 20 : 0}]}
@@ -29,6 +33,17 @@ const Home = ({navigation}) => {
                     </View>
                 </ImageBackground>
             </TouchableOpacity>       
+        )
+    }
+
+    const renderActivityItem = ({item}) => {
+        return (
+            <View style={[styles.activityItemWrapper, {
+                marginLeft: item.id === 'activities-1' ? 20 : 0
+            }]}>
+                <Image source={item.image} style={styles.activityItemImage}/>
+                <Text style={styles.activityItemText}>{item.title}</Text>
+            </View>
         )
     }
 
@@ -65,6 +80,20 @@ const Home = ({navigation}) => {
                         />
                     </View>
                 </View>
+
+                {/* Activities */}
+                <View style={styles.activitiesWrapper}>
+                    <Text style={styles.activitiesTitle}>Activities</Text>
+                    <View style={styles.activitiesItemsWrapper}>
+                        <FlatList 
+                            data={activitiesData}
+                            renderItem={renderActivityItem}
+                            keyExtractor={(item) => item.id}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                        />
+                    </View>
+                </View>
             </ScrollView>
         </View>
     )
@@ -94,7 +123,8 @@ const styles = StyleSheet.create({
     discoverTitle: {
         marginHorizontal: 20,
         fontFamily: 'Lato-Bold',
-        fontSize: 32
+        fontSize: 32,
+        color: colors.black
     },
     discoverCategoriesWrapper: {
         marginHorizontal: 20,
@@ -136,6 +166,32 @@ const styles = StyleSheet.create({
     },
     discoverItemsWrapper: {
         paddingVertical: 20
+    },
+    activitiesWrapper: {
+        marginTop: 10,
+    },
+    activitiesTitle: {
+        marginHorizontal: 20,
+        fontFamily: 'Lato-Bold',
+        fontSize: 24,
+        color: colors.black
+    },
+    activitiesItemsWrapper: {
+        paddingVertical: 20
+    },
+    activityItemWrapper: {
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginRight: 20
+    },
+    activityItemImage: {
+        width: 36,
+    },
+    activityItemText: {
+        marginTop: 5,
+        fontFamily: 'Lato-Bold',
+        fontSize: 14,
+        color: colors.grey
     },
 })
 
