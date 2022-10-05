@@ -17,7 +17,7 @@ const discoverData = [
         location: 'USA',
         image: require('../images/canyon-1.png'),
         imageBig: require('../images/canyon.png'),
-        description: "Great day hikes and backpacking routes on the North and South Rim of this century-old national park include easy hikes overlooking the rim and more rugged trekking options that descend into the canyon.",
+        description: "Great day hikes and backpacking routes on the North and South Rim of the Grand Canyon!",
         liked: true,
         price: 350,
         rating: 4.5,
