@@ -30,7 +30,7 @@ const Details = ({route, navigation}) => {
             </ImageBackground>
             <View style={styles.descriptionWrapper}>
                 <View style={styles.heartWrapper}>
-                    <Entypo name="heart" size={32} color={colors.orange}/>
+                    <Entypo name="star" size={32} color={colors.orange}/>
                 </View>
                 <View style={styles.descriptionTextWrapper}>
                     <Text style={styles.descriptionTitle}>Description</Text>
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     titlesWrapper: {
         marginHorizontal: 20,
         marginBottom: 40
-
     },
     itemTitle: {
         fontFamily: 'Lato-Bold',
